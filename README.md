@@ -8,7 +8,8 @@ This tool generates version resource source files for inclusion in Visual Studio
 ```
 Usage:
 
-ZUKI.BUILD.TOOLS.MKVERSION.EXE outdir [-ini:inifile] [-clean] [-rebuild] [-format:fmt[,fmt]] [-company:companyname] [-copyright:copyrightstring] [-product:productname] [-version:major[.minor[.build[.revision]]]]
+ZUKI.BUILD.TOOLS.MKVERSION.EXE outdir [-ini:inifile] [-clean] [-rebuild] [-format:fmt[,fmt]] [-company:companyname]  
+[-copyright:copyrightstring] [-product:productname] [-version:major[.minor[.build[.revision]]]]  
 
 Automates creation of version resource file(s) for Visual Studio projects.
 
@@ -41,4 +42,22 @@ Automates creation of version resource file(s) for Visual Studio projects.
   txt - Generic text file (version.txt)
   vb  - Managed VB.NET project (version.vb)
   wxi - WiX installer project (version.wxi)
+```
+  
+##MCTOEXCEPTION
+This tool converts the contents of a Message Compiler .MC file into a set of C++ exception classes  
+  
+In the .MC file, the only customization is to put a special `;//ExceptionName=` tag in a message declaration to enable exception class generation and specify the name of the class.  An optional comma-delimited list of argument names can follow the class name:
+  
+`;//ExceptionName=MyException,argument1,argument2,argumentN`  
+  
+```
+Usage:  
+  
+ZUKI.BUILD.TOOLS.MCTOEXCEPTION.EXE inputfile.mc outputfile.h [-unicode] [-include:"include.h"]  
+  
+  -unicode      - Generate for a project that will define _UNICODE  
+  -include:     - Add an #include directive for the specified file(s)  
+  inputfile.mc  - Input message compiler .MC text file  
+  outputfile.h  - Output C++ header file  
 ```
