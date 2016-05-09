@@ -28,23 +28,8 @@ namespace zuki.build.tools
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("Build Version       : ");
             
             #line 6 "D:\GitHub\build-tools\mkversion\TemplateTXT.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.ProductName));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 6 "D:\GitHub\build-tools\mkversion\TemplateTXT.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.ToString(2)));
-            
-            #line default
-            #line hidden
-            this.Write("\r\nBinary File Version : ");
-            
-            #line 7 "D:\GitHub\build-tools\mkversion\TemplateTXT.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.ToString(4)));
             
             #line default

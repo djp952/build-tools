@@ -3,5 +3,4 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-Build Version       : <#= m_fields.ProductName #> <#= m_fields.Version.ToString(2) #>
-Binary File Version : <#= m_fields.Version.ToString(4) #>
+<#= m_fields.Version.ToString(4) #>
