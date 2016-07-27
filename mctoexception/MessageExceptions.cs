@@ -169,9 +169,9 @@ protected:
             
             #line default
             #line hidden
-            this.Write(";\r\n\r\n\tstatic_assert(sizeof(messageid_t) == sizeof(DWORD_PTR), \"Size of message id" +
-                    "entifier type must be 32 bits for compatibility with FormatMessage\");\r\n\r\n\t// Ins" +
-                    "tance Constructor\r\n\t//\r\n\ttemplate <typename... _insertions>\r\n\t__autogen_");
+            this.Write(";\r\n\r\n\tstatic_assert(sizeof(messageid_t) == sizeof(DWORD32), \"Size of message iden" +
+                    "tifier type must be 32 bits for compatibility with FormatMessage\");\r\n\r\n\t// Insta" +
+                    "nce Constructor\r\n\t//\r\n\ttemplate <typename... _insertions>\r\n\t__autogen_");
             
             #line 85 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(m_classname));
