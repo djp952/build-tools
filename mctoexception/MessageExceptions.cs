@@ -223,19 +223,20 @@ protected:
                     "::vector<DWORD_PTR>& arguments)\r\n\t{\r\n\t\tLPTSTR message = nullptr;\t\t\t\t\t// Allocate" +
                     "d string from ::FormatMessage\r\n\r\n\t\t// Attempt to format the message from the cur" +
                     "rent module resources and provided insertions\r\n\t\tDWORD cchmessage = ::FormatMess" +
-                    "age(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_HMODULE | FORMAT_MESSAG" +
-                    "E_ARGUMENT_ARRAY, s_module, \r\n\t\t\tstatic_cast<DWORD>(messageid), ::GetThreadUILan" +
-                    "guage(), reinterpret_cast<LPTSTR>(&message), 0, reinterpret_cast<va_list*>(argum" +
-                    "ents.data())); \r\n\t\tif(cchmessage == 0) {\r\n\r\n\t\t\t// The message could not be looke" +
-                    "d up in the specified module; generate the default message instead\r\n\t\t\tif(messag" +
-                    "e) { LocalFree(message); message = nullptr; }\r\n\t\t\tcchmessage = ::FormatMessage(F" +
-                    "ORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_STRING | FORMAT_MESSAGE_ARGU" +
-                    "MENT_ARRAY, \r\n\t\t\t\ts_defaultformat, 0, 0, reinterpret_cast<LPTSTR>(&message), 0, " +
-                    "reinterpret_cast<va_list*>(&messageid));\r\n\t\t\tif(cchmessage == 0) {\r\n\r\n\t\t\t\t// The" +
-                    " default message could not be generated; give up\r\n\t\t\t\tif(message) ::LocalFree(me" +
-                    "ssage);\r\n\t\t\t\treturn nullptr;\r\n\t\t\t}\r\n\t\t}\r\n\r\n");
+                    "age(FORMAT_MESSAGE_MAX_WIDTH_MASK | FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESS" +
+                    "AGE_FROM_HMODULE | \r\n\t\t\tFORMAT_MESSAGE_ARGUMENT_ARRAY, s_module, static_cast<DWO" +
+                    "RD>(messageid), ::GetThreadUILanguage(), reinterpret_cast<LPTSTR>(&message), \r\n\t" +
+                    "\t\t0, reinterpret_cast<va_list*>(arguments.data())); \r\n\t\tif(cchmessage == 0) {\r\n\r" +
+                    "\n\t\t\t// The message could not be looked up in the specified module; generate the " +
+                    "default message instead\r\n\t\t\tif(message) { LocalFree(message); message = nullptr;" +
+                    " }\r\n\t\t\tcchmessage = ::FormatMessage(FORMAT_MESSAGE_MAX_WIDTH_MASK | FORMAT_MESSA" +
+                    "GE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_STRING | \r\n\t\t\t\tFORMAT_MESSAGE_ARGUMENT_" +
+                    "ARRAY, s_defaultformat, 0, 0, reinterpret_cast<LPTSTR>(&message), 0, reinterpret" +
+                    "_cast<va_list*>(&messageid));\r\n\t\t\tif(cchmessage == 0) {\r\n\r\n\t\t\t\t// The default me" +
+                    "ssage could not be generated; give up\r\n\t\t\t\tif(message) ::LocalFree(message);\r\n\t\t" +
+                    "\t\treturn nullptr;\r\n\t\t\t}\r\n\t\t}\r\n\r\n");
             
-            #line 178 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 179 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
  if(m_unicode) { 
             
             #line default
@@ -249,14 +250,14 @@ protected:
 		return converted;
 ");
             
-            #line 186 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 187 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write(" \r\n\t\treturn message;\r\n");
             
-            #line 188 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 189 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
  } 
             
             #line default
@@ -274,7 +275,7 @@ protected:
 
 // __autogen_");
             
-            #line 200 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 201 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(m_classname));
             
             #line default
@@ -282,7 +283,7 @@ protected:
             this.Write("::s_module\r\n//\r\n// Initialized to the module handle of this compilation unit\r\n__d" +
                     "eclspec(selectany)\r\nHMODULE const __autogen_");
             
-            #line 204 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 205 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(m_classname));
             
             #line default
@@ -291,7 +292,7 @@ protected:
                     "eEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED" +
                     "_REFCOUNT,\r\n\t\treinterpret_cast<LPCTSTR>(&__autogen_");
             
-            #line 209 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 210 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(m_classname));
             
             #line default
@@ -301,135 +302,135 @@ protected:
                     "//-----------------------------------------------------------------------------\r" +
                     "\n\r\n");
             
-            #line 218 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 219 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
  foreach(Message message in m_messages) { 
             
             #line default
             #line hidden
             this.Write("// ");
             
-            #line 219 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 220 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(message.ClassName));
             
             #line default
             #line hidden
             this.Write(" (");
             
-            #line 219 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 220 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(message.SymbolicName));
             
             #line default
             #line hidden
             this.Write(")\r\n//\r\n// ");
             
-            #line 221 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 222 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(message.MessageText));
             
             #line default
             #line hidden
             this.Write("\r\nstruct ");
             
-            #line 222 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 223 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(message.ClassName));
             
             #line default
             #line hidden
             this.Write(" : public __autogen_");
             
-            #line 222 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 223 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(m_classname));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\texplicit ");
             
-            #line 224 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(message.ClassName));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 224 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
  for(int index = 0; index < message.Arguments.Count; index++) { 
             
             #line default
             #line hidden
             
-            #line 224 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(message.Arguments[index].Key));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 224 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(message.Arguments[index].Value));
             
             #line default
             #line hidden
             
-            #line 224 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
  if(index + 1 < message.Arguments.Count) { 
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 224 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 224 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
  } 
             
             #line default
             #line hidden
             this.Write(") : __autogen_");
             
-            #line 224 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(m_classname));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 224 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(message.SymbolicName));
             
             #line default
             #line hidden
             
-            #line 224 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
  for(int index = 0; index < message.Arguments.Count; index++) { 
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 224 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(message.Arguments[index].Value));
             
             #line default
             #line hidden
             
-            #line 224 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
  } 
             
             #line default
             #line hidden
             this.Write(") {}\r\n\tvirtual ~");
             
-            #line 225 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 226 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(message.ClassName));
             
             #line default
             #line hidden
             this.Write("()=default;\r\n};\r\n\r\n");
             
-            #line 228 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 229 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
  } 
             
             #line default
@@ -437,7 +438,7 @@ protected:
             this.Write("//-----------------------------------------------------------------------------\r\n" +
                     "\r\n#pragma warning(pop)\r\n\r\n#endif\t// __AUTOGEN_");
             
-            #line 233 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
+            #line 234 "D:\GitHub\build-tools\mctoexception\MessageExceptions.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(m_classname.ToUpper()));
             
             #line default
