@@ -228,6 +228,130 @@ BEGIN
     END
 END
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+// I don't want to generate a resource.h specifically for these yet, just
+// use a (hopefully) unique resource identifier for each of these strings
+
+STRINGTABLE
+BEGIN
+    51500 /* IDS_VERSION_COMPANYNAME */ """);
+            
+            #line 99 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.CompanyName));
+            
+            #line default
+            #line hidden
+            this.Write("\"\r\n");
+            
+            #line 100 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+ if(String.IsNullOrEmpty(m_fields.LegalCopyright)) { 
+            
+            #line default
+            #line hidden
+            this.Write("    51501 /* IDS_VERSION_COPYRIGHT */   \"Copyright (C)");
+            
+            #line 100 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(DateTime.Now.ToString("yyyy")));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 100 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.CompanyName));
+            
+            #line default
+            #line hidden
+            this.Write(" - All Rights Reserved\"");
+            
+            #line 100 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 101 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+ else { 
+            
+            #line default
+            #line hidden
+            this.Write("    51501 /* IDS_VERSION_COPYRIGHT */   \"");
+            
+            #line 101 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.LegalCopyright));
+            
+            #line default
+            #line hidden
+            this.Write("\"");
+            
+            #line 101 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t51502 /* IDS_VERSION_PRODUCTNAME */ \"");
+            
+            #line 103 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.ProductName));
+            
+            #line default
+            #line hidden
+            this.Write("\"\r\n\t51503 /* IDS_VERSION_MAJOR */\t\t\"");
+            
+            #line 104 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.Major));
+            
+            #line default
+            #line hidden
+            this.Write("\"\r\n\t51504 /* IDS_VERSION_MINOR */\t\t\"");
+            
+            #line 105 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.Minor));
+            
+            #line default
+            #line hidden
+            this.Write("\"\r\n\t51505 /* IDS_VERSION_BUILD */\t\t\"");
+            
+            #line 106 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.Build));
+            
+            #line default
+            #line hidden
+            this.Write("\"\r\n\t51506 /* IDS_VERSION_REVISION */    \"");
+            
+            #line 107 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.Revision));
+            
+            #line default
+            #line hidden
+            this.Write("\"\r\n\t51507 /* IDS_VERSION_VERSION2 */    \"");
+            
+            #line 108 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.ToString(2)));
+            
+            #line default
+            #line hidden
+            this.Write("\"\r\n\t51508 /* IDS_VERSION_VERSION3 */    \"");
+            
+            #line 109 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.ToString(3)));
+            
+            #line default
+            #line hidden
+            this.Write("\"\r\n\t51509 /* IDS_VERSION_VERSION4 */    \"");
+            
+            #line 110 "D:\GitHub\build-tools\mkversion\TemplateRC.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.ToString(4)));
+            
+            #line default
+            #line hidden
+            this.Write(@"""
+END
+
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
