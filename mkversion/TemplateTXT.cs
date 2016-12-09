@@ -34,7 +34,6 @@ namespace zuki.build.tools
             
             #line default
             #line hidden
-            this.Write("\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
