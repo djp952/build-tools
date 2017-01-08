@@ -79,6 +79,7 @@ namespace zuki.build.tools
 			Console.WriteLine("  all - Generate all supported formats");
 			Console.WriteLine("  cpp - Managed C++/CLI project (version.cpp)");
 			Console.WriteLine("  cs  - Managed C# project (version.cs)");
+			Console.WriteLine("  h   - Unmanaged C/C++ project header file (version.h)");
 			Console.WriteLine("  ini - Configuration file for this utility (version.ini)");
 			Console.WriteLine("  rc  - Unmanaged C/C++ project resource script (version.rc)");
 			Console.WriteLine("  txt - Generic text file (version.txt)");
@@ -182,6 +183,7 @@ namespace zuki.build.tools
 				// Generate the requested format(s) in the output directory
 				if (all || formats.Contains("cpp")) GenerateOutputFile(outdir, "version.cpp", new TemplateCPP(fields).TransformText());
 				if (all || formats.Contains("cs")) GenerateOutputFile(outdir, "version.cs", new TemplateCS(fields).TransformText());
+				if (all || formats.Contains("h")) GenerateOutputFile(outdir, "version.h", new TemplateH(fields).TransformText());
 				if (all || formats.Contains("ini")) GenerateOutputFile(outdir, "version.ini", new TemplateINI(fields).TransformText());
 				if (all || formats.Contains("rc")) GenerateOutputFile(outdir, "version.rc", new TemplateRC(fields).TransformText());
 				if (all || formats.Contains("txt")) GenerateOutputFile(outdir, "version.txt", new TemplateTXT(fields).TransformText());

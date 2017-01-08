@@ -61,6 +61,12 @@
     </Compile>
     <Compile Include="TemplateCSCode.cs" />
     <Compile Include="TemplateFields.cs" />
+    <Compile Include="TemplateH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TemplateH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateHCode.cs" />
     <Compile Include="TemplateINI.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -119,6 +125,10 @@
     <Content Include="TemplateCS.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>TemplateCS.cs</LastGenOutput>
+    </Content>
+    <Content Include="TemplateH.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TemplateH.cs</LastGenOutput>
     </Content>
     <Content Include="TemplateINI.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

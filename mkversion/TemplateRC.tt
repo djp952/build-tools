@@ -86,30 +86,6 @@ BEGIN
     END
 END
 
-/////////////////////////////////////////////////////////////////////////////
-//
-// String Table
-//
-
-// I don't want to generate a resource.h specifically for these yet, just
-// use a (hopefully) unique resource identifier for each of these strings
-
-STRINGTABLE
-BEGIN
-    51500 /* IDS_VERSION_COMPANYNAME */ "<#= m_fields.CompanyName #>"
-<# if(String.IsNullOrEmpty(m_fields.LegalCopyright)) { #>    51501 /* IDS_VERSION_COPYRIGHT */   "Copyright (C)<#= DateTime.Now.ToString("yyyy") #> <#= m_fields.CompanyName #> - All Rights Reserved"<# } #>
-<# else { #>    51501 /* IDS_VERSION_COPYRIGHT */   "<#= m_fields.LegalCopyright #>"<# } #>
-
-	51502 /* IDS_VERSION_PRODUCTNAME */ "<#= m_fields.ProductName #>"
-	51503 /* IDS_VERSION_MAJOR */		"<#= m_fields.Version.Major #>"
-	51504 /* IDS_VERSION_MINOR */		"<#= m_fields.Version.Minor #>"
-	51505 /* IDS_VERSION_BUILD */		"<#= m_fields.Version.Build #>"
-	51506 /* IDS_VERSION_REVISION */    "<#= m_fields.Version.Revision #>"
-	51507 /* IDS_VERSION_VERSION2 */    "<#= m_fields.Version.ToString(2) #>"
-	51508 /* IDS_VERSION_VERSION3 */    "<#= m_fields.Version.ToString(3) #>"
-	51509 /* IDS_VERSION_VERSION4 */    "<#= m_fields.Version.ToString(4) #>"
-END
-
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
