@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mctoexception", "mctoexcept
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "normalizer", "normalizer\normalizer.csproj", "{CC8EC67F-3A46-4D0A-83DC-01358451E84E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zipper", "zipper\zipper.csproj", "{771C2E81-AAFF-43A0-9CDE-57307F8BBFD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CC8EC67F-3A46-4D0A-83DC-01358451E84E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC8EC67F-3A46-4D0A-83DC-01358451E84E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC8EC67F-3A46-4D0A-83DC-01358451E84E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{771C2E81-AAFF-43A0-9CDE-57307F8BBFD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{771C2E81-AAFF-43A0-9CDE-57307F8BBFD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{771C2E81-AAFF-43A0-9CDE-57307F8BBFD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{771C2E81-AAFF-43A0-9CDE-57307F8BBFD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+
+  zipper manifest
+  
+  <file>: Define a file entry in the generated ZIP archive file
+  
+    path        - Destination path within the generated archive
+    source      - Location of the source file on the local file system
+    normalize   - (Optional) Flag indicating if the source file line endings should be normalized: "none|windows|unix" (default:none)
+    
+  Example:
+  
+  <zip>
+    <file source="D:\absolute\myfile.bin" path="path\to\file"/>
+    <file source="..\relative\myfile.txt" path="path\to\file" normalize="unix"/>
+  </zip>
+-->
+
+<zip>
+</zip>
