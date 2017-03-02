@@ -115,7 +115,6 @@ namespace zuki.build.tools
 			try
 			{
                 // Spit out the name of the archive file being created
-                Console.WriteLine();
 				Console.WriteLine("create: " + zipfile);
 
 				// Create the output archive file stream
@@ -146,13 +145,15 @@ namespace zuki.build.tools
 
 			// Delete the created zip file on any exception during creation
 			catch { TryDeleteFile(zipfile); throw; }
-		}
 
-		/// <summary>
-		/// Loads all of the zip file information from the manifest file
-		/// </summary>
-		/// <param name="manifestfile">Path to the manifest.xml file</param>
-		private static List<ZipNode> LoadManifest(string manifestfile)
+            Console.WriteLine();
+        }
+
+        /// <summary>
+        /// Loads all of the zip file information from the manifest file
+        /// </summary>
+        /// <param name="manifestfile">Path to the manifest.xml file</param>
+        private static List<ZipNode> LoadManifest(string manifestfile)
 		{
 			// Ensure that the manifest file exists
 			if (!File.Exists(manifestfile)) throw new FileNotFoundException("specified manifest file [" + manifestfile + "] does not exist", manifestfile);
