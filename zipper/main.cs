@@ -133,8 +133,11 @@ namespace zuki.build.tools
 							deletesource = true;
 						}
 
+                        // CreateEntryFromFile() should use a forward slash rather than a backslash for compatibility
+                        string path = node.Path.Replace('\\', '/');
+
 						// Write the file into the archive and delete any temporary source that was generated
-						try { archive.CreateEntryFromFile(sourcefile, node.Path, CompressionLevel.Optimal); }
+						try { archive.CreateEntryFromFile(sourcefile, path, CompressionLevel.Optimal); }
 						finally { if (deletesource) TryDeleteFile(sourcefile); }
 
 						// Just spit out the resultant file name as an "add" operation for now
