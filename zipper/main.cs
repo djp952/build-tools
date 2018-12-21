@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// Copyright (c) 2017 Michael G. Brehm
+// Copyright (c) 2018 Michael G. Brehm
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -114,7 +114,7 @@ namespace zuki.build.tools
 
 			try
 			{
-                // Spit out the name of the archive file being created
+				// Spit out the name of the archive file being created
 				Console.WriteLine("create: " + zipfile);
 
 				// Create the output archive file stream
@@ -133,8 +133,8 @@ namespace zuki.build.tools
 							deletesource = true;
 						}
 
-                        // CreateEntryFromFile() should use a forward slash rather than a backslash for compatibility
-                        string path = node.Path.Replace('\\', '/');
+						// CreateEntryFromFile() should use a forward slash rather than a backslash for compatibility
+						string path = node.Path.Replace('\\', '/');
 
 						// Write the file into the archive and delete any temporary source that was generated
 						try { archive.CreateEntryFromFile(sourcefile, path, CompressionLevel.Optimal); }
@@ -149,14 +149,14 @@ namespace zuki.build.tools
 			// Delete the created zip file on any exception during creation
 			catch { TryDeleteFile(zipfile); throw; }
 
-            Console.WriteLine();
-        }
+			Console.WriteLine();
+		}
 
-        /// <summary>
-        /// Loads all of the zip file information from the manifest file
-        /// </summary>
-        /// <param name="manifestfile">Path to the manifest.xml file</param>
-        private static List<ZipNode> LoadManifest(string manifestfile)
+		/// <summary>
+		/// Loads all of the zip file information from the manifest file
+		/// </summary>
+		/// <param name="manifestfile">Path to the manifest.xml file</param>
+		private static List<ZipNode> LoadManifest(string manifestfile)
 		{
 			// Ensure that the manifest file exists
 			if (!File.Exists(manifestfile)) throw new FileNotFoundException("specified manifest file [" + manifestfile + "] does not exist", manifestfile);
@@ -174,9 +174,6 @@ namespace zuki.build.tools
 				if (child.NodeType != XmlNodeType.Element) continue;
 				XmlElement element = (XmlElement)child;
 
-				// Construct the ZipNode element to be populated
-				ZipNode node = new ZipNode();
-
 				try
 				{
 					// Get the name of the child element (<file>)
@@ -185,6 +182,9 @@ namespace zuki.build.tools
 					// <file>
 					if (elementname == "file")
 					{
+						// Construct the ZipNode element to be populated
+						ZipNode node = new ZipNode();
+
 						// Required: source= 
 						node.Source = element.GetAttribute("source");
 						if (String.IsNullOrEmpty(node.Source)) throw new Exception("missing or empty attribute 'source'");
@@ -195,13 +195,53 @@ namespace zuki.build.tools
 
 						// Optional: normalize= [default: none]
 						string normalize = element.GetAttribute("normalize");
-						if(!String.IsNullOrEmpty(normalize) && !Enum.TryParse<ZipNormalizeType>(normalize, true, out node.Normalize)) throw new Exception("unable to parse attribute 'normalize'");
+						if (!String.IsNullOrEmpty(normalize) && !Enum.TryParse<ZipNormalizeType>(normalize, true, out node.Normalize)) throw new Exception("unable to parse attribute 'normalize'");
+
+						// Add the ZipNode instance into the collection
+						zipnodes.Add(node);
+					}
+
+					// <directory>
+					else if (elementname == "directory")
+					{
+						// Required: source=
+						string source = element.GetAttribute("source");
+						if (String.IsNullOrEmpty(source)) throw new Exception("missing or empty attribute 'source'");
+
+						// Required: path= [default: root]
+						string path = element.GetAttribute("path");
+						if (path == null) path = String.Empty;
+						if (!String.IsNullOrEmpty(path)) path = path.TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
+
+						// Optional: recursive= [default: true]
+						bool recursive = true;
+						string recursivestr = element.GetAttribute("recursive");
+						if (!String.IsNullOrEmpty(recursivestr) && !Boolean.TryParse(recursivestr, out recursive)) throw new Exception("unable to parse attribute 'recursive'");
+
+						// Optional: filter= [default: *.*]
+						string filter = element.GetAttribute("filter");
+						if (String.IsNullOrEmpty(filter)) filter = "*.*";
+
+						// Generate ZipNodes for each file that matches the directory specification
+						foreach (string file in Directory.GetFiles(source, filter, (recursive) ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+						{
+							// Construct the ZipNode element to be populated
+							ZipNode node = new ZipNode();
+
+							// Set the source file name
+							node.Source = file;
+
+							// Generate and set a relative path to the file within the archive, don't allow
+							// leading path separators if the base path is the root, that messes up the zip file
+							if (!file.StartsWith(source)) throw new Exception("unexpected base path detected when adding directory file(s)");
+							node.Path = (path + file.Substring(source.Length).Trim(Path.DirectorySeparatorChar));
+
+							// Add the ZipNode instance into the collection
+							zipnodes.Add(node);
+						}
 					}
 
 					else throw new Exception("unexpected element <" + elementname + ">");
-
-					// Add the ZipNode instance into the collection
-					zipnodes.Add(node);
 				}
 
 				// Reformat the exception to include some context, the standard System.Xml.XmlDocument object

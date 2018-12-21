@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// Copyright (c) 2017 Michael G. Brehm
+// Copyright (c) 2018 Michael G. Brehm
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("zip archive creation tool")]
 [assembly: AssemblyCompany("Michael G. Brehm")]
 [assembly: AssemblyProduct("zuki.build.tools")]
-[assembly: AssemblyCopyright("Copyright (C)2017 Michael G. Brehm - All Rights Reserved")]
+[assembly: AssemblyCopyright("Copyright (C)2018 Michael G. Brehm - All Rights Reserved")]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("41157E99-0D0F-4422-957E-BA38B88B6FD3")]
@@ -45,5 +45,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
