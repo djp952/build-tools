@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// Copyright (c) 2018 Michael G. Brehm
+// Copyright (c) 2019 Michael G. Brehm
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,19 +23,21 @@
 //---------------------------------------------------------------------------
 // Usage: 
 //
-// > zipper create {zipfile} {manifest}
+// > zipper create {zipfile} {manifest} [-md5] [-sha256]
 //
 // Creates a new ZIP archive based on an archive manifest
 //
 //	zipfile		- zip archive file to be created
 //	manifest	- manifest file describing the archive contents
+//	-md5		- generate .md5 hash file
+//	-sha256		- generate .sha256 hash file
 //---------------------------------------------------------------------------
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 
@@ -64,11 +66,15 @@ namespace zuki.build.tools
 				// Get the application command
 				string command = commandline.Arguments[0].ToLower();
 
-				// > create {zipfile} {manifest}
+				// > create {zipfile} {manifest} [-md5] [-sha256]
 				if (command == "create")
 				{
 					if (commandline.Arguments.Count != 3) { ShowUsage(); return 1; }
-					CreateZip(commandline.Arguments[1], commandline.Arguments[2]);
+					string zipfile = CreateZip(commandline.Arguments[1], commandline.Arguments[2]);
+
+					// Optionally create the .md5 and/or .sha256 hash files
+					if (commandline.Switches.ContainsKey("md5")) CreateMD5Hash(zipfile);
+					if (commandline.Switches.ContainsKey("sha256")) CreateSHA256Hash(zipfile);
 				}
 
 				// unrecognized command
@@ -93,11 +99,45 @@ namespace zuki.build.tools
 		//-------------------------------------------------------------------
 
 		/// <summary>
+		/// Generates the optional .md5 output file
+		/// </summary>
+		/// <param name="zipfile">Path to the input file to be hashed</param>
+		private static void CreateMD5Hash(string zipfile)
+		{
+			if (String.IsNullOrEmpty(zipfile)) throw new ArgumentNullException("zipfile");
+			if (!File.Exists(zipfile)) throw new FileNotFoundException("zipfile", zipfile);
+
+			using (FileStream fs = File.OpenRead(zipfile))
+			{
+				string hash = String.Format("{0}  {1}", BitConverter.ToString(MD5.Create().ComputeHash(fs)).Replace("-", "").ToLower(), Path.GetFileName(zipfile));
+				File.WriteAllText(zipfile + ".md5", hash, Encoding.ASCII);
+				Console.WriteLine(hash);
+			}
+		}
+
+		/// <summary>
+		/// Generates the optional .sha256 output file
+		/// </summary>
+		/// <param name="zipfile">Path to the input file to be hashed</param>
+		private static void CreateSHA256Hash(string zipfile)
+		{
+			if (String.IsNullOrEmpty(zipfile)) throw new ArgumentNullException("zipfile");
+			if (!File.Exists(zipfile)) throw new FileNotFoundException("zipfile", zipfile);
+
+			using (FileStream fs = File.OpenRead(zipfile))
+			{
+				string hash = String.Format("{0}  {1}", BitConverter.ToString(SHA256.Create().ComputeHash(fs)).Replace("-", "").ToLower(), Path.GetFileName(zipfile));
+				File.WriteAllText(zipfile + ".sha256", hash, Encoding.ASCII);
+				Console.WriteLine(hash);
+			}
+		}
+
+		/// <summary>
 		/// Creates a new zip file based on the contents of an input manifest file
 		/// </summary>
 		/// <param name="zipfile">zip file to be created</param>
 		/// <param name="manifestfile">zip manifest file name</param>
-		private static void CreateZip(string zipfile, string manifestfile)
+		private static string CreateZip(string zipfile, string manifestfile)
 		{
 			// Attempt to load the contents of the manifest file into a List<>
 			List<ZipNode> nodes = LoadManifest(manifestfile);
@@ -150,6 +190,9 @@ namespace zuki.build.tools
 			catch { TryDeleteFile(zipfile); throw; }
 
 			Console.WriteLine();
+
+			// Return the fully qualified path to the generated file
+			return zipfile;
 		}
 
 		/// <summary>
@@ -308,12 +351,14 @@ namespace zuki.build.tools
 			Console.WriteLine();
 			Console.WriteLine("Usage:");
 			Console.WriteLine();
-			Console.WriteLine("> zipper create {zipfile} {manifest}");
+			Console.WriteLine("> zipper create {zipfile} {manifest} [-md5] [-sha256]");
 			Console.WriteLine();
 			Console.WriteLine("Creates a new ZIP archive based on an archive manifest");
 			Console.WriteLine();
 			Console.WriteLine("    zipfile   - zip archive file to be created");
 			Console.WriteLine("    manifest  - manifest file describing the archive contents");
+			Console.WriteLine("    -md5      - create {zipfile}.md5 hash file");
+			Console.WriteLine("    -sha256   - create {zipfile}.sha256 hash file");
 			Console.WriteLine();
 		}
 
