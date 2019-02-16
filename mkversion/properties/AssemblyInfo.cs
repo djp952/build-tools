@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// Copyright (c) 2016 Michael G. Brehm
+// Copyright (c) 2019 Michael G. Brehm
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Visual Studio project version file generator")]
 [assembly: AssemblyCompany("Michael G. Brehm")]
 [assembly: AssemblyProduct("zuki.build.tools")]
-[assembly: AssemblyCopyright("Copyright (C)2016 Michael G. Brehm - All Rights Reserved")]
+[assembly: AssemblyCopyright("Copyright (C)2019 Michael G. Brehm - All Rights Reserved")]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("18c5bcb8-eee4-483a-9525-a579922aab7a")]
@@ -45,5 +45,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.4.0.0")]
-[assembly: AssemblyFileVersion("3.4.0.0")]
+[assembly: AssemblyVersion("3.5.0.0")]
+[assembly: AssemblyFileVersion("3.5.0.0")]

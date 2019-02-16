@@ -12,23 +12,23 @@
 #ifndef __AUTOGEN_VERSION_H_
 #define __AUTOGEN_VERSION_H_
 
-__declspec(selectany) extern char const VERSION_PRODUCTNAME_ANSI[]			= "<#= m_fields.ProductName #>";
-__declspec(selectany) extern char const VERSION_MAJOR_ANSI[]				= "<#= m_fields.Version.Major #>";
-__declspec(selectany) extern char const VERSION_MINOR_ANSI[]				= "<#= m_fields.Version.Minor #>";
-__declspec(selectany) extern char const VERSION_BUILD_ANSI[]				= "<#= m_fields.Version.Build #>";
-__declspec(selectany) extern char const VERSION_REVISION_ANSI[]				= "<#= m_fields.Version.Revision #>";
-__declspec(selectany) extern char const VERSION_VERSION2_ANSI[]				= "<#= m_fields.Version.ToString(2) #>";
-__declspec(selectany) extern char const VERSION_VERSION3_ANSI[]				= "<#= m_fields.Version.ToString(3) #>";
-__declspec(selectany) extern char const VERSION_VERSION4_ANSI[]				= "<#= m_fields.Version.ToString(4) #>";
+static char const VERSION_PRODUCTNAME_ANSI[]		= "<#= m_fields.ProductName #>";
+static char const VERSION_MAJOR_ANSI[]				= "<#= m_fields.Version.Major #>";
+static char const VERSION_MINOR_ANSI[]				= "<#= m_fields.Version.Minor #>";
+static char const VERSION_BUILD_ANSI[]				= "<#= m_fields.Version.Build #>";
+static char const VERSION_REVISION_ANSI[]			= "<#= m_fields.Version.Revision #>";
+static char const VERSION_VERSION2_ANSI[]			= "<#= m_fields.Version.ToString(2) #>";
+static char const VERSION_VERSION3_ANSI[]			= "<#= m_fields.Version.ToString(3) #>";
+static char const VERSION_VERSION4_ANSI[]			= "<#= m_fields.Version.ToString(4) #>";
 
-__declspec(selectany) extern wchar_t const VERSION_PRODUCTNAME_UNICODE[]	= L"<#= m_fields.ProductName #>";
-__declspec(selectany) extern wchar_t const VERSION_MAJOR_UNICODE[]			= L"<#= m_fields.Version.Major #>";
-__declspec(selectany) extern wchar_t const VERSION_MINOR_UNICODE[]			= L"<#= m_fields.Version.Minor #>";
-__declspec(selectany) extern wchar_t const VERSION_BUILD_UNICODE[]			= L"<#= m_fields.Version.Build #>";
-__declspec(selectany) extern wchar_t const VERSION_REVISION_UNICODE[]		= L"<#= m_fields.Version.Revision #>";
-__declspec(selectany) extern wchar_t const VERSION_VERSION2_UNICODE[]		= L"<#= m_fields.Version.ToString(2) #>";
-__declspec(selectany) extern wchar_t const VERSION_VERSION3_UNICODE[]		= L"<#= m_fields.Version.ToString(3) #>";
-__declspec(selectany) extern wchar_t const VERSION_VERSION4_UNICODE[]		= L"<#= m_fields.Version.ToString(4) #>";
+static wchar_t const VERSION_PRODUCTNAME_UNICODE[]	= L"<#= m_fields.ProductName #>";
+static wchar_t const VERSION_MAJOR_UNICODE[]		= L"<#= m_fields.Version.Major #>";
+static wchar_t const VERSION_MINOR_UNICODE[]		= L"<#= m_fields.Version.Minor #>";
+static wchar_t const VERSION_BUILD_UNICODE[]		= L"<#= m_fields.Version.Build #>";
+static wchar_t const VERSION_REVISION_UNICODE[]		= L"<#= m_fields.Version.Revision #>";
+static wchar_t const VERSION_VERSION2_UNICODE[]		= L"<#= m_fields.Version.ToString(2) #>";
+static wchar_t const VERSION_VERSION3_UNICODE[]		= L"<#= m_fields.Version.ToString(3) #>";
+static wchar_t const VERSION_VERSION4_UNICODE[]		= L"<#= m_fields.Version.ToString(4) #>";
 
 #ifdef _UNICODE
 #define VERSION_PRODUCTNAME		VERSION_PRODUCTNAME_UNICODE
