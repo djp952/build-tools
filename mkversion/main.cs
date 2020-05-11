@@ -59,6 +59,7 @@ namespace zuki.build.tools
 			Console.WriteLine("  -ini       : Retrieve version properties from specified version.ini file");
 			Console.WriteLine("  -clean     : Clean the output directory, do not generate version file(s)");
 			Console.WriteLine("  -rebuild   : Rebuild existing file(s) in output directory");
+			Console.WriteLine("  -filename  : Base filename to use for the generated file(s) (default: version)");
 			Console.WriteLine("  -format    : Comma-delimited list of format specifiers (default: all)");
 			Console.WriteLine("  -company   : Company name property for generated version file(s)");
 			Console.WriteLine("  -copyright : Copyright string for generated file(s) (default: auto-generate)");
@@ -93,6 +94,8 @@ namespace zuki.build.tools
 		/// <param name="arguments">Command-line arguments</param>
 		static void Main(string[] arguments)
 		{
+			string basename = "version";			// Base filename string
+
 			try
 			{
 				// Parse the command line arguments and switches
@@ -111,6 +114,10 @@ namespace zuki.build.tools
 				// Create the default template fields, and override as arguments are processed
 				TemplateFields fields = new TemplateFields();
 
+				// Override the base file name if specified on the command line
+				if (commandline.Switches.ContainsKey("filename"))
+					basename = commandline.Switches["filename"];
+
 				// -clean: just delete all version.* files in the output directory
 				bool clean = commandline.Switches.ContainsKey("clean");
 
@@ -120,7 +127,7 @@ namespace zuki.build.tools
 				// If clean or rebuild has been specified, delete all matching output files
 				if (clean || rebuild)
 				{
-					foreach (string filename in Directory.GetFiles(outdir, "version.*")) File.Delete(filename);
+					foreach (string filename in Directory.GetFiles(outdir, basename + ".*")) File.Delete(filename);
 				}
 
 				// If clean was specified, there is no more action required
@@ -181,14 +188,14 @@ namespace zuki.build.tools
 				bool all = ((formats.Count == 0) || (formats.Contains("all")));
 
 				// Generate the requested format(s) in the output directory
-				if (all || formats.Contains("cpp")) GenerateOutputFile(outdir, "version.cpp", new TemplateCPP(fields).TransformText());
-				if (all || formats.Contains("cs")) GenerateOutputFile(outdir, "version.cs", new TemplateCS(fields).TransformText());
-				if (all || formats.Contains("h")) GenerateOutputFile(outdir, "version.h", new TemplateH(fields).TransformText());
-				if (all || formats.Contains("ini")) GenerateOutputFile(outdir, "version.ini", new TemplateINI(fields).TransformText());
-				if (all || formats.Contains("rc")) GenerateOutputFile(outdir, "version.rc", new TemplateRC(fields).TransformText());
-				if (all || formats.Contains("txt")) GenerateOutputFile(outdir, "version.txt", new TemplateTXT(fields).TransformText());
-				if (all || formats.Contains("vb")) GenerateOutputFile(outdir, "version.vb", new TemplateVB(fields).TransformText());
-				if (all || formats.Contains("wxi")) GenerateOutputFile(outdir, "version.wxi", new TemplateWXI(fields).TransformText());
+				if (all || formats.Contains("cpp")) GenerateOutputFile(outdir, basename + ".cpp", new TemplateCPP(fields).TransformText());
+				if (all || formats.Contains("cs")) GenerateOutputFile(outdir, basename + ".cs", new TemplateCS(fields).TransformText());
+				if (all || formats.Contains("h")) GenerateOutputFile(outdir, basename + ".h", new TemplateH(fields).TransformText());
+				if (all || formats.Contains("ini")) GenerateOutputFile(outdir, basename + ".ini", new TemplateINI(fields).TransformText());
+				if (all || formats.Contains("rc")) GenerateOutputFile(outdir, basename + ".rc", new TemplateRC(fields).TransformText());
+				if (all || formats.Contains("txt")) GenerateOutputFile(outdir, basename + ".txt", new TemplateTXT(fields).TransformText());
+				if (all || formats.Contains("vb")) GenerateOutputFile(outdir, basename + ".vb", new TemplateVB(fields).TransformText());
+				if (all || formats.Contains("wxi")) GenerateOutputFile(outdir, basename + ".wxi", new TemplateWXI(fields).TransformText());
 			}
 
 			catch (Exception ex)
