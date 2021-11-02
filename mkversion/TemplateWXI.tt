@@ -19,4 +19,5 @@
 	<?define ProjectVersion.2 = "<#= m_fields.Version.ToString(2) #>" ?>
 	<?define ProjectVersion.3 = "<#= m_fields.Version.ToString(3) #>" ?>
 	<?define ProjectVersion.4 = "<#= m_fields.Version.ToString(4) #>" ?>
+	<?define ProjectGuid = "<#= m_fields.VersionGuid.ToString("D") #>" ?>
 </Include>

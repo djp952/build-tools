@@ -85,6 +85,13 @@ namespace zuki.build.tools
             
             #line default
             #line hidden
+            this.Write("\" ?>\r\n\t<?define ProjectGuid = \"");
+            
+            #line 22 "D:\GitHub\build-tools\mkversion\TemplateWXI.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.VersionGuid.ToString("D")));
+            
+            #line default
+            #line hidden
             this.Write("\" ?>\r\n</Include>\r\n");
             return this.GenerationEnvironment.ToString();
         }

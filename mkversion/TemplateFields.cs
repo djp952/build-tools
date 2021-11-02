@@ -1,5 +1,5 @@
 ﻿//---------------------------------------------------------------------------
-// Copyright (c) 2019 Michael G. Brehm
+// Copyright (c) 2019-2021 Michael G. Brehm
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -48,6 +48,11 @@ namespace zuki.build.tools
 		/// Version
 		/// </summary>
 		public Version Version = new Version(UInt16.MaxValue, UInt16.MaxValue, UInt16.MaxValue, UInt16.MaxValue);
+
+		/// <summary>
+		/// VersionGuid
+		/// </summary>
+		public Guid VersionGuid = Guid.Empty;
 
 		/// <summary>
 		/// Originally specified version string (no auto-generated values)

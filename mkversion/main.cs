@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// Copyright (c) 2019 Michael G. Brehm
+// Copyright (c) 2019-2021 Michael G. Brehm
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -92,7 +92,7 @@ namespace zuki.build.tools
 		/// Application entry point
 		/// </summary>
 		/// <param name="arguments">Command-line arguments</param>
-		static void Main(string[] arguments)
+		static int Main(string[] arguments)
 		{
 			string basename = "version";			// Base filename string
 
@@ -102,7 +102,7 @@ namespace zuki.build.tools
 				CommandLine commandline = new CommandLine(arguments);
 
 				// If help was requested, just display the usage and exit
-				if (commandline.Switches.ContainsKey("?")) { ShowUsage(); return; }
+				if (commandline.Switches.ContainsKey("?")) { ShowUsage(); return 0; }
 
 				// There has to be at least one command line argument to indicate the output directory
 				if (commandline.Arguments.Count < 1) throw new ArgumentException("An output directory must be specified");
@@ -131,7 +131,7 @@ namespace zuki.build.tools
 				}
 
 				// If clean was specified, there is no more action required
-				if (clean) return;
+				if (clean) return 0;
 
 				// First process the ini file, if one was specified
 				if (commandline.Switches.ContainsKey("ini"))
@@ -175,6 +175,9 @@ namespace zuki.build.tools
 						throw new ArgumentException("Invalid version string format specified on command line");
 				}
 
+				// Convert the version into a pseudo-uuid based on the final full version number
+				fields.VersionGuid = GuidFromVersion(fields.ProductName, fields.Version);
+
 				// Generate the list of formats to be generated (empty = generate all)
 				List<string> formats = new List<string>();
 				if (commandline.Switches.ContainsKey("format"))
@@ -204,6 +207,8 @@ namespace zuki.build.tools
 				Console.WriteLine("ERROR: " + ex.Message);
 				Console.WriteLine();
 			}
+
+			return 0;
 		}
 
 		/// <summary>
@@ -221,6 +226,37 @@ namespace zuki.build.tools
 			// won't always trigger a compile/link when this is used in a custom build step)
 			if (File.Exists(outname)) return;
 			else File.WriteAllText(outname, content);
+		}
+
+		/// <summary>
+		/// Converts a Version object into a pseudo-uuid that will be the same provided that
+		/// the project string and all four fields of the version number are the same
+		/// </summary>
+		/// <param name="product">Product name</param>
+		/// <param name="version">Full version number</param>
+		/// <returns></returns>
+		static Guid GuidFromVersion(string product, Version version)
+		{
+			if(product == null) throw new ArgumentNullException("product");
+			if(version == null) throw new ArgumentNullException("version");
+
+			// Convert the product into lowercase before hashing it
+			product = product.ToLowerInvariant();
+
+			// Hash four 32-bit values that can be used to generate the Guid
+			int producthash = product.GetHashCode();
+			int majorhash = version.Major.ToString().GetHashCode();
+			int minorhash = version.Minor.ToString().GetHashCode();
+			int buildhash = version.Build.ToString().GetHashCode();
+
+			// Convert the four hashed values into a 128-bit Guid object
+			byte[] bytes = new byte[16];
+			BitConverter.GetBytes(producthash).CopyTo(bytes, 0);
+			BitConverter.GetBytes(majorhash ^ producthash).CopyTo(bytes, 4);
+			BitConverter.GetBytes(minorhash ^ producthash).CopyTo(bytes, 8);
+			BitConverter.GetBytes(buildhash ^ producthash).CopyTo(bytes, 12);
+
+			return new Guid(bytes);
 		}
 
 		/// <summary>
