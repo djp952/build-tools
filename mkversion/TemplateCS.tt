@@ -18,5 +18,5 @@ using System.Runtime.InteropServices;
 <# if(String.IsNullOrEmpty(m_fields.LegalCopyright)) { #>[assembly: AssemblyCopyright("Copyright (C)<#= DateTime.Now.ToString("yyyy") #> <#= m_fields.CompanyName #> - All Rights Reserved")] <# } #>
 <# else { #>[assembly: AssemblyCopyright("<#= m_fields.LegalCopyright #>")]<# } #>
 
-[assembly: AssemblyVersion("<#= m_fields.Version.ToString(2) #>.0.0")]
+[assembly: AssemblyVersion("<#= m_fields.Version.ToString(3) #>.0")]
 [assembly: AssemblyFileVersion("<#= m_fields.Version.ToString(4) #>")]

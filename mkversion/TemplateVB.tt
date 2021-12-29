@@ -18,5 +18,5 @@ Imports System.Runtime.InteropServices
 <# if(String.IsNullOrEmpty(m_fields.LegalCopyright)) { #><Assembly: AssemblyCopyright("Copyright (C)<#= DateTime.Now.ToString("yyyy") #> <#= m_fields.CompanyName #> - All Rights Reserved")> <# } #>
 <# else { #><Assembly: AssemblyCopyright("<#= m_fields.LegalCopyright #>")><# } #>
 
-<Assembly: AssemblyVersion("<#= m_fields.Version.ToString(2) #>.0.0")> 
+<Assembly: AssemblyVersion("<#= m_fields.Version.ToString(3) #>.0")> 
 <Assembly: AssemblyFileVersion("<#= m_fields.Version.ToString(4) #>")> 

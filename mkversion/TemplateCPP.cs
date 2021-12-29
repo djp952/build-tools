@@ -111,11 +111,11 @@ using namespace System::Runtime::InteropServices;
             this.Write("\r\n[assembly: AssemblyVersionAttribute(\"");
             
             #line 24 "D:\git\build-tools\mkversion\TemplateCPP.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.ToString(2)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.ToString(3)));
             
             #line default
             #line hidden
-            this.Write(".0.0\")];\r\n[assembly: AssemblyFileVersionAttribute(\"");
+            this.Write(".0\")];\r\n[assembly: AssemblyFileVersionAttribute(\"");
             
             #line 25 "D:\git\build-tools\mkversion\TemplateCPP.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.ToString(4)));

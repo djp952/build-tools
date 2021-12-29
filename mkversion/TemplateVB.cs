@@ -103,11 +103,11 @@ namespace zuki.build.tools
             this.Write("\r\n<Assembly: AssemblyVersion(\"");
             
             #line 21 "D:\git\build-tools\mkversion\TemplateVB.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.ToString(2)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.ToString(3)));
             
             #line default
             #line hidden
-            this.Write(".0.0\")> \r\n<Assembly: AssemblyFileVersion(\"");
+            this.Write(".0\")> \r\n<Assembly: AssemblyFileVersion(\"");
             
             #line 22 "D:\git\build-tools\mkversion\TemplateVB.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(m_fields.Version.ToString(4)));
